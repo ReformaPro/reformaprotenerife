@@ -1,0 +1,29 @@
+import zipfile, os
+
+base = "/mnt/data"
+
+# Riassembliamo il pacchetto finale con tutti i file
+files_to_include = [
+    os.path.join(base, "index_reforma_pro_tenerife_with_icons_collage.html"),
+    os.path.join(base, "logo-square.png"),
+    os.path.join(base, "logo-wide.png"),
+    os.path.join(base, "collage_2x3_icons.png"),
+    os.path.join(base, "icon_pavimenti_ripristino.png"),
+    os.path.join(base, "icon_bagno_ristrutturato.png"),
+    os.path.join(base, "icon_cucina_ristrutturata.png"),
+    os.path.join(base, "icon_pittura_decorazioni.png"),
+    os.path.join(base, "icon_infissi_finestre.png"),
+    os.path.join(base, "icon_soggiorno_restyling.png")
+]
+
+zip_path = os.path.join(base, "reforma_pro_tenerife_website.zip")
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for f in files_to_include:
+        if os.path.exists(f):
+            arcname = os.path.basename(f)
+            # rinominiamo l'html in index.html
+            if "index_reforma_pro_tenerife_with_icons_collage.html" in f:
+                arcname = "index.html"
+            z.write(f, arcname=arcname)
+
+zip_path
